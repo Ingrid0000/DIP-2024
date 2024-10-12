@@ -26,3 +26,8 @@ https://itsfoss.com/install-imagemagick-ubuntu/
 確認已安裝，但卡在
 display: delegate library support not built-in '' (X11) @ error/display.c/DisplayImageCommand/1907.
 此錯誤無法排解
+
+P.P.S.參照此網址
+https://blog.csdn.net/wsp_1138886114/article/details/116780542
+寫出 bior.py, code.py, db2.py, haar1.py, haar2.py
+並另外修改出 biorcopy.py 為可自行導入圖片的版本
