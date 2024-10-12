@@ -15,7 +15,7 @@ https://medium.com/@leo81005/%E8%A7%A3%E6%B1%BA-import-cv2-xfeatures2d-%E7%94%A2
 https://blog.csdn.net/qq_41290252/article/details/134290491
 寫出SSIM、SIFT、SURF、ORB等四種比較的程式碼
 但 SURF 方法 import函式庫失敗，SSIM、SIFT、ORB三種方法的相似度差異極大
-其中SIFT的相似度最正常
+其中SIFT的相似度最正常，相似度約為0.6
 
 P.S.無法正常使用ImageMagick，因此放棄使用JPEG2000進行比對
 https://imagemagick.org/script/download.php
