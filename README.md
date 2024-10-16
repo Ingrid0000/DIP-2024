@@ -4,6 +4,7 @@
 
 1.Le Gall 5/3
 https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
+
 2.dwt 5/3 與 dwt 9/7 的數值小波轉換
 https://github.com/2bad4u/dwt
 
