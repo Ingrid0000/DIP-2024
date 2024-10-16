@@ -8,6 +8,10 @@ https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
 2.dwt 5/3 與 dwt 9/7 的數值小波轉換
 https://github.com/2bad4u/dwt
 
+3.基於https://blog.csdn.net/weixin_36815313/article/details/108531674
+和https://blog.csdn.net/qq_42951560/article/details/115456471
+寫出兩種計算PSNR的程式碼以參照
+
 10/13小結
 
 1.參照此網址
