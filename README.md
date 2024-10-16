@@ -4,7 +4,7 @@
 
 1.Le Gall 5/3 參考網址
 https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
-將圖片輸入並做三次CDF5/3小波轉換，顯示小波轉換的圖片以及最終解壓縮後的圖片
+將圖片輸入並做三次CDF5/3小波轉換，顯示小波轉換的圖片以及最終壓縮後的圖片
 
 程式修正:dwt和idwt函式中的width與height作者皆寫相反
 
