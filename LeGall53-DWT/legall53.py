@@ -87,25 +87,31 @@ def idwt(img):
     imgDWT[2:mt-2, 2:nt-2] = img
     imgInTrans = np.copy(imgDWT)
     for j in range(2, nt-2):
+        #row(橫的)
         imgInTrans[0][j] = imgInTrans[2][j]
         imgInTrans[1][j] = imgInTrans[3][j]
         imgInTrans[mt - 1][j] = imgInTrans[mt - 3][j]
         imgInTrans[mt - 2][j] = imgInTrans[mt - 4][j]
         for i in range(2, mt-2, 2):
+            # High fruquency (diagonal)
             imgInTrans[i][j] = imgDWT[int(i/2)][j] - (imgDWT[int(i/2+height-1)][j]+imgDWT[int(i/2+height+1)][j]+2)/4
         for i in range(1, mt-2, 2):
+            # High fruquency (horizontal)
             imgInTrans[i][j] = imgDWT[int(i/2+height)][j] + (imgInTrans[i-1][j]+imgInTrans[i+1][j])/2
 
     imgDWT = np.copy(imgInTrans)
 
     for i in range(2, mt):
+        #column(直的)
         imgInTrans[i][0] = imgInTrans[i][2]
         imgInTrans[i][1] = imgInTrans[i][3]
         imgInTrans[i][nt-1] = imgInTrans[i][nt-3]
         imgInTrans[i][nt-2] = imgInTrans[i][nt-4]
         for j in range(2, nt-2, 2):
+            # High fruquency (diagonal)
             imgInTrans[i][j] = imgDWT[i][int(j/2)] - (imgDWT[i][int(j/2+width-1)] + imgDWT[i][int(j/2+width+1)]+2) / 4
         for j in range(1, nt-2, 2):
+            # High fruquency (vertical)
             imgInTrans[i][j] = imgDWT[i][int(j/2+width)] + (imgInTrans[i][j-1]+imgInTrans[i][j+1])/2
     return imgInTrans[2:mt-2, 2:nt-2]
 
