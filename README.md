@@ -2,13 +2,14 @@
 
 10/16小結
 
-Le Gall 5/3 參考網址
+1.Le Gall 5/3 參考網址
 https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
 將圖片輸入並做三次CDF5/3小波轉換
-程式改正:dwt和idwt函式中的width與height作者皆寫相反
+
+程式修正:dwt和idwt函式中的width與height作者皆寫相反
 
 
-3.基於https://blog.csdn.net/weixin_36815313/article/details/108531674
+2.基於https://blog.csdn.net/weixin_36815313/article/details/108531674
 和https://blog.csdn.net/qq_42951560/article/details/115456471
 寫出兩種計算PSNR的程式碼以參照
 
