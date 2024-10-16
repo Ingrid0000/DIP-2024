@@ -1,5 +1,9 @@
 # DIP-2024
 
+10/16
+Le Gall 5/3
+https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
+
 10/13小結
 
 1.參照此網址
