@@ -20,15 +20,17 @@ def dwt(img):
     imgTrans[2:mt-2, 2:nt-2] = img_data
     imgTransResult = np.copy(imgTrans)
     for i in range(2,mt):
+        #column(直的)
         imgTrans[i][0] = imgTrans[i][2]
         imgTrans[i][1] = imgTrans[i][3]
         imgTrans[i][nt-1] = imgTrans[i][nt-3]
         imgTrans[i][nt-2] = imgTrans[i][nt-4]
         for j in range(1,nt-2,2):
-            # High fruquency
+            # High fruquency (vertical)
             j_1 = int(Width + j/2)
             imgTransResult[i][j_1] = imgTrans[i][j] - (imgTrans[i][j-1]+imgTrans[i][j+1])/2
         for j in range(2,nt-2,2):
+            # High fruquency (diagonal)
             i_1 = int(i/2)
             j_1 = int(Width + j / 2)
             j_2 = int(j/2)
@@ -37,15 +39,17 @@ def dwt(img):
     imgTrans = np.copy(imgTransResult)
 
     for j in range(2,nt):
+        #row(橫的)
         imgTrans[0][j] = imgTrans[2][j]
         imgTrans[1][j] = imgTrans[3][j]
         imgTrans[mt-1][j] = imgTrans[mt-3][j]
         imgTrans[mt-2][j] = imgTrans[mt-4][j]
         for i in range(1, mt-2, 2):
-            # High fruquency
+            # High fruquency (horizontal)
             i_1 = int(Height + i/2)
             imgTransResult[i_1][j] = imgTrans[i][j] - (imgTrans[i-1][j]+imgTrans[i+1][j])/2
         for i in range(2, mt-2, 2):
+            # High fruquency (diagonal)
             i_1 = int(Height + i / 2)
             i_2 = int(i/2)
             imgTransResult[i_2][j] = imgTrans[i][j] + (imgTransResult[i_1-1][j]+imgTransResult[i_1+1][j]+2)/4
