@@ -54,8 +54,6 @@ def dwt(img):
             i_2 = int(i/2)
             imgTransResult[i_2][j] = imgTrans[i][j] + (imgTransResult[i_1-1][j]+imgTransResult[i_1+1][j]+2)/4
 
-
-
     return imgTransResult[2:mt-2, 2:nt-2]
 
 
