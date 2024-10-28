@@ -1,5 +1,20 @@
 # DIP-2024
 
+10/28小結
+1.https://jpegai.github.io/test_images/
+dataset
+
+2.https://blog.csdn.net/ccsss22/article/details/134276610
+MATLAB小波轉換
+
+3.legall53多次壓縮後，解壓縮與預期不符
+
+4.jp2壓縮率大幅提升，PSNR下降
+不同dataset的PSNR差異巨大（01、13成果極好，02、06、08差不多，09最差）
+PSNR對高頻較敏感，故高頻細節多的圖片，處理後PSNR數值較好
+
+5.**目標**haar、db2、bior壓縮解壓縮成同一圖片，並比較PSNR
+
 10/16小結
 
 1.Le Gall 5/3 參考網址
