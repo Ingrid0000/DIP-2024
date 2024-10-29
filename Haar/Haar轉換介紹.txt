@@ -1,0 +1,63 @@
+這段程式碼實現了 Haar 小波變換的前向（haar_forward）和逆向（haar_inverse）變換，適用於 2D 彩色或灰度圖像。以下是對這段程式碼的詳細解釋。
+
+函數概述
+1.haar_forward(image, levels=3)：
+  將輸入的 2D 圖像進行多層次的 Haar 小波變換。
+  輸出與輸入形狀相同的包含小波係數的陣列。
+
+2.haar_inverse(image, levels=3)：
+  根據給定的層數重建原始圖像。
+  確保提供的層數與前向變換時的層數相同。
+
+主要內部函數
+one_level_decomp(img)
+  進行單層次的 Haar 小波變換：
+    首先，將圖像的寬和高調整為偶數，以便進行處理。
+    取偶數列和奇數列，計算其平均值（低頻係數）和差值（高頻係數），並更新圖像。
+
+    Y, X = img.shape[0], img.shape[1]
+    Y, X = (Y // 2) * 2, (X // 2) * 2  # 確保維度是偶數
+
+    a = img[:, 0:X:2, ...].copy()  # 偶數列
+    b = img[:, 1:X:2, ...].copy()  # 奇數列
+
+    img[:, :X//2, ...] = (a + b) / 2  # 計算低頻
+    img[:, X//2:X, ...] = (a - b) / 2  # 計算高頻
+
+  然後，對每一行進行相同的處理，以獲得完整的低頻和高頻小波係數。
+
+multi_scale_decomp(img, levels)
+  此函數執行多層次的 Haar 小波變換：
+    循環進行多次單層次變換，直到達到指定的層數。
+
+    for s in range(levels):
+        img[:(H >> s), :(W >> s), ...] = one_level_decomp(img[:(H >> s), :(W >> s), ...])
+
+逆變換部分
+one_level_recomp(img)
+  此函數進行單層次的逆變換：
+    首先將圖像的低頻和高頻係數拆分回去，然後使用平均和差值重新構建原始圖像的部分。
+
+    a = img[:, :X//2, ...].copy()  # 低頻
+    b = img[:, X//2:X, ...].copy()  # 高頻
+
+    img[:, 0:X:2, ...] = a + b  # 重建偶數列
+    img[:, 1:X:2, ...] = a - b  # 重建奇數列
+
+multi_scale_recomp(img, levels)
+  此函數進行多層次的逆變換：
+    從最高層次開始，逐步重建到原始圖像。
+
+    for s in reversed(range(levels)):
+        img[:(H >> s), :(W >> s), ...] = one_level_recomp(img[:(H >> s), :(W >> s), ...])
+
+使用示例
+這些函數可以用來進行圖像處理，例如圖像壓縮或特徵提取。下面是一個使用這些函數的簡單示例：
+
+# 假設 img 是已經讀取的 2D 圖像
+coefficients = haar_forward(img, levels=3)
+reconstructed_img = haar_inverse(coefficients, levels=3)
+
+注意事項
+  如果圖像的高度或寬度是奇數，則該維度的最後一行或列將不會在變換中被處理。
+  確保在進行逆變換時使用與前向變換相同的層數。
