@@ -26,10 +26,11 @@ def main():
     end = timer()
 
     Image.fromarray(hwt.clip(0,255).astype(np.uint8)).save("13_wavelets_for.png") # save visualization
+    cv2.cvtColor(hwt, cv2.COLOR_RGB2BGR,hwt)
     cv2.imwrite('13_wavelets_for.jp2', hwt.clip(0,255).astype(np.uint8))
     Image.fromarray(inv.clip(0,255).astype(np.uint8)).save("13_wavelets_inv.png") # save reconstructed image
     cv2.cvtColor(inv, cv2.COLOR_RGB2BGR,inv)
-    cv2.imwrite('13_wavelets_inv.jp2', inv.astype(np.uint8))
+    cv2.imwrite('13_wavelets_inv.jp2', inv.clip(0,255).astype(np.uint8))
     
     print("Time taken in seconds for forward and inverse Haar wavelet transform:", end-start)
 
