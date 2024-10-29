@@ -2,7 +2,7 @@
 # 10/30小結
 
 1.https://github.com/achanta/HaarWaveletDecomposition/tree/main 的 Haar壓縮可執行，且可處理彩色的圖片
-Haar資料夾中的demo_copy.py，改良demo.py第31行，使圖片能夠儲存成正確的色彩空間
+Haar資料夾中的demo_copy.py，改良demo.py第29及32行，使圖片能夠儲存成正確的色彩空間
 
 2.compare資料夾中，psnr.py和ssim.py皆可執行彩色圖片的比較
 ssim.py的執行結果，顯示小波轉換的失真極小，ssim數值皆在0.96以上
