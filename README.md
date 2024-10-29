@@ -9,7 +9,9 @@ ssim.py的執行結果，顯示小波轉換的失真極小，ssim數值皆在0.9
 https://blog.csdn.net/qq_42951560/article/details/115463083 ssim.py參考資料
 https://blog.csdn.net/xwyljt/article/details/124408257  ssim.py參考資料
 
-3.**目標**將 LeGall53.py 改為可以執行彩色圖片的程式
+3.將 LeGall53.py 改為可以執行彩色圖片的程式
+legall53_copy.py為增加彩色通道的一次小波轉換程式
+Compressed_LeGall53_color_image_09.jp2為一次小波轉換的彩色圖片
 
 10/29小結
 
