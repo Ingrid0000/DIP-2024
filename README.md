@@ -1,6 +1,6 @@
 # DIP-2024
 
-10/29
+10/29小結
 
 1.若使用pywt.dwt2以及pywt.idwt2進行壓縮，haar、db2、bior壓縮解壓縮成同一圖片，三者的PSNR相同
 使用pywt.wavedec2及pywt.waverec2亦然
