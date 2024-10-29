@@ -1,5 +1,15 @@
 # DIP-2024
 
+10/29
+1.若使用pywt.dwt2以及pywt.idwt2進行壓縮，haar、db2、bior壓縮解壓縮成同一圖片，三者的PSNR相同
+使用pywt.wavedec2及pywt.waverec2亦然
+
+2.https://blog.csdn.net/qq_43657442/article/details/109380852 wavedec2參考資料
+https://blog.csdn.net/weixin_40074642/article/details/139522549?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-139522549-blog-129525054.235^v43^pc_blog_bottom_relevance_base7&spm=1001.2101.3001.4242.2&utm_relevant_index=4 wavedec2參考資料
+https://blog.csdn.net/qq_40723205/article/details/125981439?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-125981439-blog-109380852.235^v43^pc_blog_bottom_relevance_base7&spm=1001.2101.3001.4242.1&utm_relevant_index=3 wavedec2參考資料
+https://blog.csdn.net/neoyek/article/details/83041469?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-83041469-blog-109380852.235^v43^pc_blog_bottom_relevance_base7&spm=1001.2101.3001.4242.2&utm_relevant_index=4 waverec函數介紹
+https://blog.csdn.net/weixin_42613360/article/details/129525054 waverec參數介紹
+
 10/28小結
 1.https://jpegai.github.io/test_images/
 dataset
