@@ -13,6 +13,10 @@ https://blog.csdn.net/xwyljt/article/details/124408257  ssim.py參考資料
 legall53_copy.py為增加彩色通道的一次小波轉換程式
 Compressed_LeGall53_color_image_09.jp2為一次小波轉換的彩色圖片
 
+4.可嘗試進行編碼
+https://github.com/ghallak/jpeg-python/blob/master/encoder.py
+https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
+
 10/29小結
 
 1.若使用pywt.dwt2以及pywt.idwt2進行壓縮，haar、db2、bior壓縮解壓縮成同一圖片，三者的PSNR相同
