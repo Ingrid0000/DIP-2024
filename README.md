@@ -15,6 +15,7 @@ Compressed_LeGall53_color_image_09.jp2為一次小波轉換的彩色圖片
 
 4.可嘗試進行編碼
 https://github.com/ghallak/jpeg-python/blob/master/encoder.py
+https://github.com/fangwei123456/python-jpeg-encoder/blob/master/jpegEncoder.py
 https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
 
 10/29小結
