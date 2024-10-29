@@ -1,4 +1,15 @@
 # DIP-2024
+10/30小結
+
+1.https://github.com/achanta/HaarWaveletDecomposition/tree/main 的 Haar壓縮可執行，且可處理彩色的圖片
+Haar資料夾中的demo_copy.py，改良demo.py第31行，使圖片能夠儲存成正確的色彩空間
+
+2.compare資料夾中，psnr.py和ssim.py皆可執行彩色圖片的比較
+ssim.py的執行結果，顯示小波轉換的失真極小，ssim數值皆在0.96以上
+https://blog.csdn.net/qq_42951560/article/details/115463083 ssim.py參考資料
+https://blog.csdn.net/xwyljt/article/details/124408257  ssim.py參考資料
+
+3.**目標**將 LeGall53.py 改為可以執行彩色圖片的程式
 
 10/29小結
 
