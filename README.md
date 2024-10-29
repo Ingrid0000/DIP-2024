@@ -1,5 +1,5 @@
 # DIP-2024
-10/30小結
+# 10/30小結
 
 1.https://github.com/achanta/HaarWaveletDecomposition/tree/main 的 Haar壓縮可執行，且可處理彩色的圖片
 Haar資料夾中的demo_copy.py，改良demo.py第31行，使圖片能夠儲存成正確的色彩空間
@@ -18,7 +18,7 @@ https://github.com/ghallak/jpeg-python/blob/master/encoder.py
 https://github.com/fangwei123456/python-jpeg-encoder/blob/master/jpegEncoder.py
 https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
 
-10/29小結
+# 10/29小結
 
 1.若使用pywt.dwt2以及pywt.idwt2進行壓縮，haar、db2、bior壓縮解壓縮成同一圖片，三者的PSNR相同
 使用pywt.wavedec2及pywt.waverec2亦然
@@ -29,7 +29,7 @@ https://blog.csdn.net/qq_40723205/article/details/125981439?utm_medium=distribut
 https://blog.csdn.net/neoyek/article/details/83041469?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-83041469-blog-109380852.235^v43^pc_blog_bottom_relevance_base7&spm=1001.2101.3001.4242.2&utm_relevant_index=4 waverec函數介紹
 https://blog.csdn.net/weixin_42613360/article/details/129525054 waverec參數介紹
 
-10/28小結
+# 10/28小結
 
 1.https://jpegai.github.io/test_images/
 dataset
@@ -47,7 +47,7 @@ PSNR對高頻較敏感，故高頻細節多的圖片，處理後PSNR數值較好
 
 6.**目標**haar、db2、bior壓縮解壓縮成同一圖片，並比較PSNR
 
-10/16小結
+# 10/16小結
 
 1.Le Gall 5/3 參考網址
 https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
@@ -60,7 +60,7 @@ https://github.com/KaiserLew/LeGall53-DWT/blob/master/LeGall53.py
 和https://blog.csdn.net/qq_42951560/article/details/115456471
 寫出兩種計算PSNR的程式碼以參照
 
-10/13小結
+# 10/13小結
 
 1.參照此網址
 https://medium.com/@ryanwmccoy/exploring-image-compression-with-fourier-and-wavelet-transformations-using-python-0b3c15a72703
