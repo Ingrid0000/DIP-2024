@@ -18,6 +18,9 @@ https://github.com/ghallak/jpeg-python/blob/master/encoder.py
 https://github.com/fangwei123456/python-jpeg-encoder/blob/master/jpegEncoder.py
 https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
 
+5.https://www.ece.iastate.edu/~zambreno/assets/pdf/PanZam12A.pdf
+小波轉換的係數參考資料
+
 # 10/29小結
 
 1.若使用pywt.dwt2以及pywt.idwt2進行壓縮，haar、db2、bior壓縮解壓縮成同一圖片，三者的PSNR相同
