@@ -20,7 +20,12 @@ https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
 
 5.https://www.ece.iastate.edu/~zambreno/assets/pdf/PanZam12A.pdf LeGall53 小波轉換的係數參考資料
 https://www.mdpi.com/2079-9292/7/7/120 Daubechies Wavelet Transform的係數參考資料
-https://zh.wikipedia.org/zh-tw/%E5%A4%9A%E8%B4%9D%E8%A5%BF%E5%B0%8F%E6%B3%A2 Daubechies Wavelet Transform的維基百科
+https://zh.wikipedia.org/zh-tw/%E5%A4%9A%E8%B4%9D%E8%A5%BF%E5%B0%8F%E6%B3%A2 Daubechies Wavelet Transform的維基百科，並附上ChatGPT的程式碼解說
+
+6.https://github.com/ivansinichkin/Wavelet_Haar_DaubechiesD4/blob/main/Daubechies.py
+https://github.com/fukuroder/daubechies_wavelet_coefficients/blob/master/test.py
+https://github.com/larshb/2d-dwt/tree/master
+Daubechies Wavelet Transform參考資料
 
 # 10/29小結
 
