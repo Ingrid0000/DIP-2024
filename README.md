@@ -18,8 +18,9 @@ https://github.com/ghallak/jpeg-python/blob/master/encoder.py
 https://github.com/fangwei123456/python-jpeg-encoder/blob/master/jpegEncoder.py
 https://github.com/tbpaolini/PyJpegDecoder/blob/master/jpeg_decoder.py
 
-5.https://www.ece.iastate.edu/~zambreno/assets/pdf/PanZam12A.pdf
-小波轉換的係數參考資料
+5.https://www.ece.iastate.edu/~zambreno/assets/pdf/PanZam12A.pdf LeGall53 小波轉換的係數參考資料
+https://www.mdpi.com/2079-9292/7/7/120 Daubechies Wavelet Transform的係數參考資料
+https://zh.wikipedia.org/zh-tw/%E5%A4%9A%E8%B4%9D%E8%A5%BF%E5%B0%8F%E6%B3%A2 Daubechies Wavelet Transform的維基百科
 
 # 10/29小結
 
