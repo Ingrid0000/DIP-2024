@@ -1,0 +1,117 @@
+這段程式碼實現了離散小波變換（DWT）及其反變換（iDWT），並提供了相應的子抽樣和上抽樣功能。下面是各部分的詳細解釋：
+
+### 1. 子抽樣（Subsampling）
+
+```python
+def subsampling(x, d):
+    if d == 1:
+        y = x[::2, :]  # 每隔兩行取一行
+    elif d == 2:
+        y = x[:, ::2]  # 每隔兩列取一列
+    return y
+```
+- **功能**：根據給定的維度 `d`，從輸入數組 `x` 中抽取子樣本。
+- **參數**：
+  - `x`: 輸入數據。
+  - `d`: 抽樣的維度（1表示行，2表示列）。
+- **返回**：抽樣後的數組 `y`。
+
+### 2. 上抽樣（Upsampling）
+
+```python
+def upsampling(x, d):
+    s = x.shape
+    if d == 1:
+        y = np.zeros((p * s[0], s[1]))  # 創建一個新的數組以存放上抽樣結果
+        y[::2, :] = x  # 每隔一行填入原數據
+    elif d == 2:
+        y = np.zeros((s[0], p * s[1]))  # 創建一個新的數組以存放上抽樣結果
+        y[:, ::2] = x  # 每隔一列填入原數據
+    return y
+```
+- **功能**：根據維度 `d`，將數據 `x` 上抽樣。
+- **參數**：
+  - `x`: 輸入數據。
+  - `d`: 上抽樣的維度（1表示行，2表示列）。
+- **返回**：上抽樣後的數組 `y`。
+
+### 3. 循環卷積（Circular Convolution）
+
+```python
+def cconv(x, h, d):
+    if d == 2:
+        return np.transpose(cconv(np.transpose(x), h, 1))  # 如果是第二維度，進行轉置處理
+    y = np.zeros(x.shape)
+    p = len(h)  # 濾波器的長度
+    pc = int(round(float((p - 1) / 2)))  # 中心索引
+    for i in range(0, p):
+        y = y + h[i] * np.roll(x, i - pc, axis=0)  # 對每個濾波器係數進行卷積
+    return y
+```
+- **功能**：實現循環卷積。
+- **參數**：
+  - `x`: 輸入數據。
+  - `h`: 濾波器係數。
+  - `d`: 卷積的維度（1或2）。
+- **返回**：卷積結果 `y`。
+
+### 4. 離散小波變換（DWT）
+
+```python
+def DWT(image, h, g):  # 離散小波變換
+    fW = image.copy()  # 複製輸入圖像
+    j = int(np.log2(image.shape[0]) - 1)  # 計算圖像的最大小波層級
+    A = fW[:2**(j+1), :2**(j+1)]  # 提取圖像的子區域
+
+    Coarse = subsampling(cconv(A, h, 1), 1)  # 進行卷積並子抽樣
+    Detail = subsampling(cconv(A, g, 1), 1)  # 進行卷積並子抽樣
+    A = np.concatenate((Coarse, Detail), axis=0)  # 合併粗略和細節係數
+
+    Coarse = subsampling(cconv(A, h, 2), 2)  # 對合併結果進行卷積並子抽樣
+    Detail = subsampling(cconv(A, g, 2), 2)  # 對合併結果進行卷積並子抽樣
+    A = np.concatenate((Coarse, Detail), axis=1)  # 合併粗略和細節係數
+
+    fW[:2**(j+1), :2**(j+1)] = A  # 更新原始圖像的子區域
+    return fW
+```
+- **功能**：執行離散小波變換。
+- **參數**：
+  - `image`: 輸入圖像。
+  - `h`: 縮放濾波器。
+  - `g`: 小波濾波器。
+- **返回**：經過小波變換後的圖像 `fW`。
+
+### 5. 反向離散小波變換（iDWT）
+
+```python
+def iDWT(image, fW, h, g):  # image是原始圖像，fW是經過DWT的結果
+    f1 = fW.copy()  # 複製DWT結果
+    j = int(np.log2(image.shape[0]) - 1)
+    A = f1[:2**(j+1), :2**(j+1)]
+    Coarse = A[:2**j, :]
+    Detail = A[2**j:2**(j+1), :]
+    h1 = h[::-1]  # 反轉濾波器
+    g1 = g[::-1]  # 反轉小波濾波器
+    Coarse = cconv(upsampling(Coarse, 1), h1, 1)  # 上抽樣並卷積
+    Detail = cconv(upsampling(Detail, 1), g1, 1)  # 上抽樣並卷積
+    A = Coarse + Detail  # 合併粗略和細節部分
+
+    Coarse = A[:, :2**j]
+    Detail = A[:, 2**j:2**(j+1)]
+    Coarse = cconv(upsampling(Coarse, 2), h1, 2)  # 上抽樣並卷積
+    Detail = cconv(upsampling(Detail, 2), g1, 2)  # 上抽樣並卷積
+    A = Coarse + Detail  # 合併
+
+    f1[:2**(j+1), :2**(j+1)] = A  # 更新反向變換結果
+    return f1
+```
+- **功能**：執行反向離散小波變換。
+- **參數**：
+  - `image`: 原始圖像。
+  - `fW`: 經過小波變換的圖像。
+  - `h`: 縮放濾波器。
+  - `g`: 小波濾波器。
+- **返回**：重建的圖像 `f1`。
+
+### 總結
+這段程式碼實現了離散小波變換和其反向變換的基本功能，利用循環卷積和抽樣技術來處理和重建圖像。這在圖像處理、特徵提取和去噪等應用中非常有用。
