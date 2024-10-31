@@ -12,6 +12,8 @@ https://blog.csdn.net/xwyljt/article/details/124408257  ssim.py參考資料
 3.新增 color_dwt 和 color_idwt 函數，對每個顏色通道分別進行 DWT 和 IDWT，將 LeGall53.py 改為可以執行彩色圖片的程式
 legall53_copy.py為增加彩色通道的一次小波轉換程式
 Compressed_LeGall53_color_image_09.jp2為一次小波轉換的彩色圖片
+https://blog.csdn.net/youcans/article/details/121174708 cv2.split的介紹
+https://blog.csdn.net/youcans/article/details/121174740 cv2.merge的介紹
 
 4.可嘗試進行編碼
 https://github.com/ghallak/jpeg-python/blob/master/encoder.py
