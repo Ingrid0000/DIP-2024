@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def haar_img():
-    img_u8 = cv2.imread("/home/vboxuser/DIP/00009_TE_1976x1312.png")
+    img_u8 = cv2.imread("/home/vboxuser/DIP/00001_TE_2096x1400.png")
     img_f32 = cv2.cvtColor(img_u8, cv2.COLOR_BGR2GRAY).astype(np.float32)
 
     plt.figure('二維小波一級變換')
@@ -23,5 +23,5 @@ if __name__ == '__main__':
 
     plt.imshow(img, 'gray')
     plt.title('img')
+    cv2.imwrite('二維小波一級變換.jpg', img)
     plt.show()
-
