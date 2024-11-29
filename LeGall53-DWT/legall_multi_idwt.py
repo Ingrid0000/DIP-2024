@@ -1,0 +1,179 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# forward one time dwt using Le Gall 5/3 wavelet
+def dwt(img):
+    img_data = img.astype(float)
+    m,n = img_data.shape
+    img_dwt = np.zeros(img.shape)
+    imgTrans = np.zeros((m+4, n+4))
+    mt,nt = imgTrans.shape
+    Height = mt / 2
+    Width = nt / 2
+    imgTrans[2:mt-2, 2:nt-2] = img_data
+    imgTransResult = np.copy(imgTrans)
+    for i in range(2,mt):
+        #column(直的)
+        imgTrans[i][0] = imgTrans[i][2]
+        imgTrans[i][1] = imgTrans[i][3]
+        imgTrans[i][nt-1] = imgTrans[i][nt-3]
+        imgTrans[i][nt-2] = imgTrans[i][nt-4]
+        for j in range(1,nt-2,2):
+            # High fruquency (vertical)
+            j_1 = int(Width + j/2)
+            imgTransResult[i][j_1] = imgTrans[i][j] - (imgTrans[i][j-1]+imgTrans[i][j+1])/2
+        for j in range(2,nt-2,2):
+            # High fruquency (diagonal)
+            i_1 = int(i/2)
+            j_1 = int(Width + j / 2)
+            j_2 = int(j/2)
+            imgTransResult[i][j_2] = imgTrans[i][j] + (imgTransResult[i][j_1-1]+imgTransResult[i][j_1+1]+2)/4
+
+    imgTrans = np.copy(imgTransResult)
+
+    for j in range(2,nt):
+        #row(橫的)
+        imgTrans[0][j] = imgTrans[2][j]
+        imgTrans[1][j] = imgTrans[3][j]
+        imgTrans[mt-1][j] = imgTrans[mt-3][j]
+        imgTrans[mt-2][j] = imgTrans[mt-4][j]
+        for i in range(1, mt-2, 2):
+            # High fruquency (horizontal)
+            i_1 = int(Height + i/2)
+            imgTransResult[i_1][j] = imgTrans[i][j] - (imgTrans[i-1][j]+imgTrans[i+1][j])/2
+        for i in range(2, mt-2, 2):
+            # High fruquency (diagonal)
+            i_1 = int(Height + i / 2)
+            i_2 = int(i/2)
+            imgTransResult[i_2][j] = imgTrans[i][j] + (imgTransResult[i_1-1][j]+imgTransResult[i_1+1][j]+2)/4
+
+    return imgTransResult[2:mt-2, 2:nt-2]
+
+
+# forward twice dwt using Le Gall 5/3 wavelet
+def twice_dwt(imgin):
+    img = np.copy(imgin)
+    m, n = img.shape
+    img_deal = img[0:int(m/2), 0:int(n/2)]
+    img_after_deal = dwt(img_deal)
+    img[0:int(m/2), 0:int(n/2)] = img_after_deal
+    return abs(img)
+
+# forward three times dwt using Le Gall 5/3 wavelet
+def thrice_dwt(imgin):
+    img = np.copy(imgin)
+    m, n = img.shape
+    img_deal = img[0:int(m/4), 0:int(n/4)]
+    img_after_deal = dwt(img_deal)
+    img[0:int(m / 4), 0:int(n / 4)] = img_after_deal
+    return abs(img)
+
+# idwt
+def idwt(img):
+    m, n = img.shape
+    imgDWT = np.zeros((m+4, n+4))
+    mt, nt = imgDWT.shape
+    height = mt/2
+    width = nt/2
+
+    imgDWT[2:mt-2, 2:nt-2] = img
+    imgInTrans = np.copy(imgDWT)
+    
+    for j in range(2, nt-2):
+        #row(橫的)
+        imgInTrans[0][j] = imgInTrans[2][j]
+        imgInTrans[1][j] = imgInTrans[3][j]
+        imgInTrans[mt - 1][j] = imgInTrans[mt - 3][j]
+        imgInTrans[mt - 2][j] = imgInTrans[mt - 4][j]
+        for i in range(2, mt-2, 2):
+            # High fruquency (diagonal)
+            imgInTrans[i][j] = imgDWT[int(i/2)][j] - (imgDWT[int(i/2+height-1)][j]+imgDWT[int(i/2+height+1)][j]+2)/4
+        for i in range(1, mt-2, 2):
+            # High fruquency (horizontal)
+            imgInTrans[i][j] = imgDWT[int(i/2+height)][j] + (imgInTrans[i-1][j]+imgInTrans[i+1][j])/2
+
+    imgDWT = np.copy(imgInTrans)
+
+    for i in range(2, mt):
+        #column(直的)
+        imgInTrans[i][0] = imgInTrans[i][2]
+        imgInTrans[i][1] = imgInTrans[i][3]
+        imgInTrans[i][nt-1] = imgInTrans[i][nt-3]
+        imgInTrans[i][nt-2] = imgInTrans[i][nt-4]
+        for j in range(2, nt-2, 2):
+            # High fruquency (diagonal)
+            imgInTrans[i][j] = imgDWT[i][int(j/2)] - (imgDWT[i][int(j/2+width-1)] + imgDWT[i][int(j/2+width+1)]+2) / 4
+        for j in range(1, nt-2, 2):
+            # High fruquency (vertical)
+            imgInTrans[i][j] = imgDWT[i][int(j/2+width)] + (imgInTrans[i][j-1]+imgInTrans[i][j+1])/2
+    return imgInTrans[2:mt-2, 2:nt-2]
+
+
+def multi_idwt(img, levels):
+    result_img = np.copy(img)    
+    # Perform inverse DWT for each level
+    for _ in range(levels):
+        result_img = idwt(result_img)  # Apply the single-level IDWT
+
+    return result_img
+
+
+if __name__ == "__main__":
+
+    img = cv2.imread('/home/jc/圖片/02.png', 0)
+    ImgShow = dwt(img)
+
+    # two times DWT
+
+    ImgTwiceDwt = twice_dwt(ImgShow)
+
+    # three times DWT
+    ImgShowThriceDwt = thrice_dwt(ImgTwiceDwt)
+
+    # iDWT
+    ImgRe = idwt(ImgShow)
+    
+    # 設定需要的反小波轉換層數
+    levels = 3
+
+    # 使用多階反小波轉換
+    ImgReMultiDwt = multi_idwt(ImgShowThriceDwt, levels)
+
+
+    # show the images
+    plt.subplot(221)
+    plt.imshow(img,'gray')
+    plt.title('(a)')
+    plt.xticks([]), plt.yticks([])
+
+    plt.subplot(222)
+    plt.imshow(abs(ImgShow),'gray')
+    plt.title('(b)')
+    plt.xticks([]), plt.yticks([])
+
+    plt.subplot(223)
+    plt.imshow(ImgTwiceDwt,'gray')
+    plt.title('(c)')
+    plt.xticks([]), plt.yticks([])
+    
+    plt.subplot(224)
+    plt.imshow(ImgShowThriceDwt,'gray')
+    plt.title('(d)')
+    plt.xticks([]), plt.yticks([])
+    
+    plt.show()
+    
+    # show the images
+    '''
+    plt.imshow(ImgRe,'gray')
+    plt.xticks([]), plt.yticks([])
+    cv2.imwrite('Compressed_LeGall53.png', ImgRe)
+    '''
+    plt.imshow(ImgReMultiDwt, 'gray')
+    plt.title('Reconstructed Image (Multi-level IDWT)')
+    cv2.imwrite('Compressed_LeGall53_Multi-level.png', ImgReMultiDwt)
+    plt.xticks([]), plt.yticks([])
+    
+    plt.show()
