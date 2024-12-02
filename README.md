@@ -1,4 +1,8 @@
 # DIP-2024
+# 12/02小結
+
+1.https://blog.csdn.net/Leo_whj/article/details/110394374 使用median濾波器將多階反小波轉換的影像降噪。
+
 # 11/29小結
 
 實現多階反小波轉換，但圖像變得較模糊，且檔案(png)變大。
